@@ -17,23 +17,24 @@ type AllProjects struct {
 	} `json:"projects"`
 }
 
-func Get() ([]byte, error) {
+func Get() ([]string, error) {
 
 	// GET ServiceAccount of one project
 	url := "https://cloudresourcemanager.googleapis.com/v1/projects"
 
-	// get []byte of request
 	data, err := web.Get(url)
 	if err != nil {
 		fmt.Println(err)
 	}
 	//fmt.Println(string(data))
 
-	//var pjs Projects
 	var allProjects AllProjects
+	var projects []string
 	json.Unmarshal(data, &allProjects)
 	for i, v := range allProjects.Projects {
-		fmt.Printf("Project[%d]: %s\n", i, v.Name)
+		fmt.Printf("Project[%d]: %s\n", i, v.ProjectID)
+		projects = append(projects, v.ProjectID)
 	}
-	return data, nil
+
+	return projects, nil
 }
