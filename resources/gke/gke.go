@@ -215,9 +215,9 @@ type AllClusters struct {
 	} `json:"clusters"`
 }
 
-func Get() {
-	//url := fmt.Sprintf("projects/%s/locations/-", "ultra-sound-324019")
-	url := "https://container.googleapis.com/v1beta1/projects/ultra-sound-324019/locations/us-central1/clusters"
+func Get(projectID string) {
+
+	url := fmt.Sprintf("https://container.googleapis.com/v1beta1/projects/%s/locations/us-central1/clusters", projectID)
 
 	data, err := web.Get(url)
 	if err != nil {

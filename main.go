@@ -6,6 +6,11 @@ import (
 )
 
 func main() {
-	projects.Get()
-	gke.Get()
+	projects, err := projects.Get()
+	if err != nil {
+        panic(err)
+    }
+	for _, project := range projects {
+		gke.Get(project)
+	}
 }
