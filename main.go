@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gcp-golang/pkg/api"
 	"gcp-golang/resources/gke"
 	"gcp-golang/resources/projects"
 )
@@ -8,9 +9,12 @@ import (
 func main() {
 	projects, err := projects.Get()
 	if err != nil {
-        panic(err)
-    }
+		panic(err)
+	}
 	for _, project := range projects {
 		gke.Get(project)
 	}
+
+	// start api server
+	api.StartServer()
 }
